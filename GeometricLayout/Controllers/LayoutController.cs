@@ -40,7 +40,7 @@ namespace GeometricLayout.Controllers
         [HttpGet("?coordinates={corodinates}")]
         public ActionResult<GeometricItem> GetByCoordinates(string coordinates)
         {
-            throw new NotImplementedException();
+            return _layoutService.GetByCoordinates(coordinates);
         }
         #endregion
     }

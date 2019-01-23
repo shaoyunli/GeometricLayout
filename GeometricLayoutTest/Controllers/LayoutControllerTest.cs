@@ -44,7 +44,6 @@ namespace GeometricLayoutTest.Controllers
             mockLayoutService.Verify(srv => srv.GetAll(), Times.Once);
         }
 
-
         [TestMethod]
         public void GetById_Verify_Service_GetById_Called()
         {
@@ -62,6 +61,26 @@ namespace GeometricLayoutTest.Controllers
             // assert
             Assert.AreEqual(triangle, okResult.Value);
             mockLayoutService.Verify(srv => srv.GetById(id), Times.Once);
+        }
+
+        [TestMethod]
+        public void GetByCoordinates_Verify_Service_GetByCoordinates_Called()
+        {
+            // arrange
+            var coordinates = "coordinates";
+            var triangle = new Mock<ITriangle>();
+            var geometricItem = new GeometricItem("id", triangle.Object);
+
+            mockLayoutService.Setup(src => src.GetByCoordinates(coordinates)).Returns(geometricItem);
+
+            layoutController = new LayoutController(mockLayoutService.Object);
+
+            // act
+            var okResult = layoutController.GetByCoordinates(coordinates);
+
+            // assert
+            Assert.AreEqual(geometricItem, okResult.Value);
+            mockLayoutService.Verify(srv => srv.GetByCoordinates(coordinates), Times.Once);
         }
 
     }

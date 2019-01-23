@@ -24,6 +24,6 @@ namespace GeometricLayout.Services
         /// </summary>
         /// <param name="coordinates">A string containing vertex coordinates of a triangle.</param>
         /// <returns>GeometricItem</returns>
-        IGeometricItem GetByCoordinates(string coordinates);
+        GeometricItem GetByCoordinates(string coordinates);
     }
 }
