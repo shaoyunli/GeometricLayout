@@ -1,11 +1,33 @@
-﻿namespace GeometricLayout.Models
+﻿using System;
+using System.Collections.Generic;
+using GeometricLayout.Interfaces;
+
+namespace GeometricLayout.Models
 {
-    public class Triangle
+    public abstract class Triangle: ITriangle
     {
-        public Coordinate Vertex1 { get; set; }
+        public Triangle(Coordinate coordinate1, Coordinate coordinate2, Coordinate coordinate3)
+        {
+            ValidateCoordinates(coordinate1, coordinate2, coordinate3);
+            Coordinates.Add(coordinate1);
+            Coordinates.Add(coordinate2);
+            Coordinates.Add(coordinate3);
+        }
 
-        public Coordinate Vertex2 { get; set; }
+        public List<Coordinate> Coordinates { get; private set; }
 
-        public Coordinate Vertex3 { get; set; }        
+        protected abstract void ValidateSpecificTriangle(Coordinate coordinate1, Coordinate coordinate2, Coordinate coordinate3);
+
+        private void ValidateCoordinates(Coordinate coordinate1, Coordinate coordinate2, Coordinate coordinate3)
+        {
+            ValidateGenericTriangle(coordinate1, coordinate2, coordinate3);
+            ValidateSpecificTriangle(coordinate1, coordinate2, coordinate3);
+        }
+
+        private void ValidateGenericTriangle(Coordinate coordinate1, Coordinate coordinate2, Coordinate coordinate3)
+        {
+            throw new NotImplementedException();
+        }
+
     }
 }
