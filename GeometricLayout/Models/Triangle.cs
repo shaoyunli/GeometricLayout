@@ -9,6 +9,7 @@ namespace GeometricLayout.Models
         public Triangle(Coordinate coordinate1, Coordinate coordinate2, Coordinate coordinate3)
         {
             ValidateCoordinates(coordinate1, coordinate2, coordinate3);
+            List<Coordinate> Coordinates = new List<Coordinate>();
             Coordinates.Add(coordinate1);
             Coordinates.Add(coordinate2);
             Coordinates.Add(coordinate3);
@@ -26,7 +27,7 @@ namespace GeometricLayout.Models
 
         private void ValidateGenericTriangle(Coordinate coordinate1, Coordinate coordinate2, Coordinate coordinate3)
         {
-            throw new NotImplementedException();
+            return;
         }
 
     }

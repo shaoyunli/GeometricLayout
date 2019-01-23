@@ -11,7 +11,7 @@ namespace GeometricLayout.Models
 
         protected override void ValidateSpecificTriangle(Coordinate coordinate1, Coordinate coordinate2, Coordinate coordinate3)
         {
-            throw new NotImplementedException();
+            return;
         }
     }
 }

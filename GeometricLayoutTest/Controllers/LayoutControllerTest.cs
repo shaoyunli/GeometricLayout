@@ -4,6 +4,7 @@ using Moq;
 using GeometricLayout.Controllers;
 using GeometricLayout.Services;
 using GeometricLayout.Interfaces;
+using GeometricLayout.Models;
 
 namespace GeometricLayoutTest.Controllers
 {
@@ -42,5 +43,26 @@ namespace GeometricLayoutTest.Controllers
             Assert.AreEqual(mockTriangles, okResult.Value);
             mockLayoutService.Verify(srv => srv.GetAll(), Times.Once);
         }
+
+
+        [TestMethod]
+        public void GetById_Verify_Service_GetById_Called()
+        {
+            // arrange
+            var triangle = new RightTriangle(new Coordinate(0, 10), new Coordinate(10, 0), new Coordinate(0, 0));
+            var id = "A1";
+
+            mockLayoutService.Setup(src => src.GetById(id)).Returns(triangle);
+
+            layoutController = new LayoutController(mockLayoutService.Object);
+
+            // act
+            var okResult = layoutController.GetById(id);
+
+            // assert
+            Assert.AreEqual(triangle, okResult.Value);
+            mockLayoutService.Verify(srv => srv.GetById(id), Times.Once);
+        }
+
     }
 }

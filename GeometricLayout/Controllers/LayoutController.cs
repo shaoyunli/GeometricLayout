@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
 using GeometricLayout.Services;
 using GeometricLayout.Interfaces;
+using GeometricLayout.Models;
 
 #region GeometricLayoutController
 namespace GeometricLayout.Controllers
@@ -29,15 +30,15 @@ namespace GeometricLayout.Controllers
 
         #region snippet_GetByRowColumn
         [HttpGet("{id}")]
-        public ActionResult<ITriangle> GetById(string id)
+        public ActionResult<Triangle> GetById(string id)
         {
-            throw new NotImplementedException();
+            return _layoutService.GetById(id);
         }
         #endregion
 
         #region snippet_GetByVertexCoordinates
         [HttpGet("?coordinates={corodinates}")]
-        public ActionResult<IGeometricItem> GetByCoordinates(string coordinates)
+        public ActionResult<GeometricItem> GetByCoordinates(string coordinates)
         {
             throw new NotImplementedException();
         }

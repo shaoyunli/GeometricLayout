@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using GeometricLayout.Interfaces;
+using GeometricLayout.Models;
 
 namespace GeometricLayout.Services
 {
@@ -16,7 +17,7 @@ namespace GeometricLayout.Services
         /// </summary>
         /// <param name="id">id which indicates row and column.</param>
         /// <returns>Triangle</returns>
-        ITriangle GetById(string id);
+        Triangle GetById(string id);
 
         /// <summary>
         /// Get a single triangle
