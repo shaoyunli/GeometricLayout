@@ -6,6 +6,6 @@
 
         public Coordinate Vertex2 { get; set; }
 
-        public Coordinate Vertex3 { get; set; }
+        public Coordinate Vertex3 { get; set; }        
     }
 }
