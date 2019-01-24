@@ -1,17 +1,16 @@
-﻿using GeometricLayout.Interfaces;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace GeometricLayout.Models
 {
     public class GeometricItem
     {
-        public GeometricItem(string id, ITriangle triangle)
-        {
-            Id = id;
-            Triangle = triangle;
-        }
+        [Required]
+        public char Row { get; set; }
 
-        public string Id { get; private set; }
+        [Required]
+        public int Column { get; set; }
 
-        public ITriangle Triangle { get; private set; }
+        [Required]
+        public RightTriangle Triangle { get; set; }
     }
 }

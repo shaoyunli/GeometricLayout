@@ -21,66 +21,76 @@ namespace GeometricLayoutTest.Controllers
         }
 
         [TestMethod]
-        public void GetAll_Verify_Service_GetAll_Called()
+        public void GetByRowColumn_Verify_Service_GetById_Called()
         {
             // arrange
-            var mockTriangles = new List<ITriangle>();
-
-            for(var i = 0; i < 72; i++)
+            var row = 'F';
+            var column = 1;
+            var triangle = new RightTriangle()
             {
-                var mockTriangle = new Mock<ITriangle>();
-                mockTriangles.Add(mockTriangle.Object);
-            }
+                X1 = 0,
+                Y1 = 0,
+                X2 = 0,
+                Y2 = 10,
+                X3 = 10,
+                Y3 = 0
+            };
 
-            mockLayoutService.Setup(src => src.GetAll()).Returns(mockTriangles);
+            var item =new GeometricItem()
+            {
+                Row = row,
+                Column = column,
+                Triangle = triangle
+            };
 
+            mockLayoutService.Setup(src => src.GetByRowColumn(row, column)).Returns(item);
             layoutController = new LayoutController(mockLayoutService.Object);
 
             // act
-            var okResult = layoutController.GetAll();
+            var okResult = layoutController.GetByRowColumn(row, column);
 
             // assert
-            Assert.AreEqual(mockTriangles, okResult.Value);
-            mockLayoutService.Verify(srv => srv.GetAll(), Times.Once);
-        }
-
-        [TestMethod]
-        public void GetById_Verify_Service_GetById_Called()
-        {
-            // arrange
-            var triangle = new RightTriangle(new Coordinate(0, 10), new Coordinate(10, 0), new Coordinate(0, 0));
-            var id = "A1";
-
-            mockLayoutService.Setup(src => src.GetById(id)).Returns(triangle);
-
-            layoutController = new LayoutController(mockLayoutService.Object);
-
-            // act
-            var okResult = layoutController.GetById(id);
-
-            // assert
-            Assert.AreEqual(triangle, okResult.Value);
-            mockLayoutService.Verify(srv => srv.GetById(id), Times.Once);
+            Assert.AreEqual(item, okResult.Value);
+            mockLayoutService.Verify(srv => srv.GetByRowColumn(row, column), Times.Once);
         }
 
         [TestMethod]
         public void GetByCoordinates_Verify_Service_GetByCoordinates_Called()
         {
             // arrange
-            var coordinates = "coordinates";
-            var triangle = new Mock<ITriangle>();
-            var geometricItem = new GeometricItem("id", triangle.Object);
+            int x1, y1, x2, y2, x3, y3;
+            x1 = y1 = x2 = y3 = 0;
+            y2 = x3 = 10;
+            var row = 'F';
+            var column = 1;
 
-            mockLayoutService.Setup(src => src.GetByCoordinates(coordinates)).Returns(geometricItem);
+            var triangle = new RightTriangle()
+            {
+                X1 = x1,
+                Y1 = y1,
+                X2 = x2,
+                Y2 = y2,
+                X3 = x3,
+                Y3 = y3
+            };
+
+            var geometricItem = new GeometricItem()
+            {
+                Row = row,
+                Column = column,
+                Triangle = triangle
+            };
+
+            mockLayoutService.Setup(src => src.GetByCoordinates(x1, y1, x2, y2, x3, y3)).Returns(geometricItem);
 
             layoutController = new LayoutController(mockLayoutService.Object);
 
             // act
-            var okResult = layoutController.GetByCoordinates(coordinates);
+            var okResult = layoutController.GetByCoordinates(x1, y1, x2, y2, x3, y3);
 
             // assert
             Assert.AreEqual(geometricItem, okResult.Value);
-            mockLayoutService.Verify(srv => srv.GetByCoordinates(coordinates), Times.Once);
+            mockLayoutService.Verify(srv => srv.GetByCoordinates(x1, y1, x2, y2, x3, y3), Times.Once);
         }
 
     }

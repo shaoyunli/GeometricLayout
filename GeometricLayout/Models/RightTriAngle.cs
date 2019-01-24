@@ -1,17 +1,25 @@
-﻿using System;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace GeometricLayout.Models
 {
-    public class RightTriangle : Triangle
+    public class RightTriangle
     {
-        public RightTriangle(Coordinate coordinate1, Coordinate coordinate2, Coordinate coordinate3) :
-            base(coordinate1, coordinate2, coordinate3)
-        {
-        }
+        [Required]
+        public int X1 { get; set; }
 
-        protected override void ValidateSpecificTriangle(Coordinate coordinate1, Coordinate coordinate2, Coordinate coordinate3)
-        {
-            return;
-        }
+        [Required]
+        public int Y1 { get; set; }
+
+        [Required]
+        public int X2 { get; set; }
+
+        [Required]
+        public int Y2 { get; set; }
+
+        [Required]
+        public int X3 { get; set; }
+
+        [Required]
+        public int Y3 { get; set; }
     }
 }
