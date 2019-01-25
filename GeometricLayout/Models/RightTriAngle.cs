@@ -27,7 +27,13 @@ namespace GeometricLayout.Models
 
         public List<Tuple<int, int>> ToVertexList()
         {
-            return new List<Tuple<int, int>> { new Tuple<int, int>(X1, Y1), new Tuple<int, int>(X2, Y2), new Tuple<int, int>(X3, Y3) };
+            var vertexList = new List<Tuple<int, int>> { new Tuple<int, int>(X1, Y1), new Tuple<int, int>(X2, Y2), new Tuple<int, int>(X3, Y3) };
+             vertexList.Sort((x, y) =>
+            {
+                int result = y.Item1.CompareTo(x.Item1);
+                return result == 0 ? result : y.Item2.CompareTo(x.Item2);
+            });
+            return vertexList;
         }
     }
 }
