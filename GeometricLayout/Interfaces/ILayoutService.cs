@@ -1,6 +1,6 @@
 ﻿using GeometricLayout.Models;
 
-namespace GeometricLayout.Services
+namespace GeometricLayout.Interfaces
 {
     public interface ILayoutService
     {
@@ -9,7 +9,7 @@ namespace GeometricLayout.Services
         /// </summary>
         /// <param name="row">Row.</param>
         /// <param name="column">Column.</param>
-        GeometricItem GetByRowColumn(char row, int column);
+        RightTriangle GetByRowColumn(char row, int column);
 
         /// <summary>
         /// Get a single geometric item including its row and column as well as the coordinates of the three vertices. 
@@ -21,6 +21,6 @@ namespace GeometricLayout.Services
         /// <param name="v3X">X axis of vertex3</param>
         /// <param name="v3Y">Y axis of vertex3</param>
         /// <returns></returns>
-        GeometricItem GetByCoordinates(int v1X, int v1Y, int v2X, int v2Y, int v3X, int v3Y);
+        TriangleIndentifier GetByCoordinates(int v1X, int v1Y, int v2X, int v2Y, int v3X, int v3Y);
     }
 }

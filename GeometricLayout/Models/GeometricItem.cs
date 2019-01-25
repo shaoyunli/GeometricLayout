@@ -2,15 +2,12 @@
 
 namespace GeometricLayout.Models
 {
-    public class GeometricItem
+    public class TriangleIndentifier
     {
         [Required]
         public char Row { get; set; }
 
         [Required]
         public int Column { get; set; }
-
-        [Required]
-        public RightTriangle Triangle { get; set; }
     }
 }
