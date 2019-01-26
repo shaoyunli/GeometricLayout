@@ -14,13 +14,13 @@ namespace GeometricLayout.Interfaces
         /// <summary>
         /// Get a single geometric item including its row and column as well as the coordinates of the three vertices. 
         /// </summary>
-        /// <param name="v1X">X axis of vertex1</param>
-        /// <param name="v1Y">Y axis of vertex1</param>
-        /// <param name="v2X">X axis of vertex2</param>
-        /// <param name="v2Y">Y axis of vertex2</param>
-        /// <param name="v3X">X axis of vertex3</param>
-        /// <param name="v3Y">Y axis of vertex3</param>
+        /// <param name="x1">X axis of vertex1</param>
+        /// <param name="y1">Y axis of vertex1</param>
+        /// <param name="x2">X axis of vertex2</param>
+        /// <param name="y2">Y axis of vertex2</param>
+        /// <param name="x3">X axis of vertex3</param>
+        /// <param name="y3">Y axis of vertex3</param>
         /// <returns></returns>
-        TriangleIndentifier GetByCoordinates(int v1X, int v1Y, int v2X, int v2Y, int v3X, int v3Y);
+        string GetByCoordinates(int x1, int y1, int x2, int y2, int x3, int y3);
     }
 }

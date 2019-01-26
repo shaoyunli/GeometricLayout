@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using GeometricLayout.Interfaces;
 using GeometricLayout.Models;
 
@@ -37,9 +39,26 @@ namespace GeometricLayout.Services
             return triangle;
         }
 
-        public TriangleIndentifier GetByCoordinates(int v1X, int v1Y, int v2X, int v2Y, int v3X, int v3Y)
+        public string GetByCoordinates(int x1, int y1, int x2, int y2, int x3, int y3)
         {
-            throw new System.NotImplementedException();
+            // TODO: Validate if the vertex coordinates are for right triangle
+
+            return "";
+
+        }
+
+        public static List<Tuple<int, int>> ConvertToTupleList(int x1, int y1, int x2, int y2, int x3, int y3)
+        {
+            List<Tuple<int, int>> coordinatesTuples = new List<Tuple<int, int>>() {
+                new Tuple<int, int>(x1, y1), new Tuple<int, int>(x2, y2), new Tuple<int, int>(x3, y3)};
+
+            coordinatesTuples.Sort((x, y) =>
+            {
+                int result = y.Item1.CompareTo(x.Item1);
+                return result == 0 ? result : y.Item2.CompareTo(x.Item2);
+            });
+
+            return coordinatesTuples;
         }
     }
 }

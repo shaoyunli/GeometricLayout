@@ -9,5 +9,10 @@ namespace GeometricLayout.Models
 
         [Required]
         public int Column { get; set; }
+
+        public override string ToString()
+        {
+            return Row + Column.ToString();
+        }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using GeometricLayout.Models;
@@ -102,7 +103,7 @@ namespace GeometricLayoutTest.Test.Services
                 new { caseId = "F12" , row = 'F', column = 12, expect = new RightTriangle(){ X1 = 50, Y1 = 10, X2 = 60, Y2 = 0,  X3 = 60, Y3 = 10 }}
             };
 
-            foreach(var testCase in testCases)
+            foreach (var testCase in testCases)
             {
                 // arrange
                 char row = testCase.row;
@@ -210,16 +211,36 @@ namespace GeometricLayoutTest.Test.Services
 
                 // act
                 var result = layoutService.GetByCoordinates(
-                    testCase.coordinates.X1, 
-                    testCase.coordinates.Y1, 
+                    testCase.coordinates.X1,
+                    testCase.coordinates.Y1,
                     testCase.coordinates.X2,
-                    testCase.coordinates.Y2, 
-                    testCase.coordinates.X3, 
+                    testCase.coordinates.Y2,
+                    testCase.coordinates.X3,
                     testCase.coordinates.Y3);
 
                 // assert
                 Assert.AreEqual(expectedResult, result);
             }
+        }
+
+        [TestMethod]
+        public void ConvertToTupleList_Test()
+        {
+            int x1 = 40;
+            int y1 = 20;
+            int x2 = 30;
+            int y2 = 30;
+            int x3 = 40;
+            int y3 = 3;
+
+
+            var expect = new List<Tuple<int, int>>() { new Tuple<int, int>(30, 30), new Tuple<int, int>(40, 20), new Tuple<int, int>(40, 30) };
+
+            // act
+            var result = LayoutService.ConvertToTupleList(x1, y1, x2, y2, x3, y3);
+
+            // assert
+            Assert.IsTrue(expect.SequenceEqual(result));
         }
     }
 }
