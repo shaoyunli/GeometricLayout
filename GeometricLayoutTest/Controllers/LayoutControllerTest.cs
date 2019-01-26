@@ -1,4 +1,5 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using System;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using GeometricLayout.Interfaces;
 using GeometricLayout.Controllers;
@@ -19,7 +20,7 @@ namespace GeometricLayoutTest.Controllers
         }
 
         [TestMethod]
-        public void GetByRowColumn_Verify_Service_GetById_Called()
+        public void GetByRowColumn_Successful_Verify_Service_GetById_Called()
         {
             // arrange
             var row = 'F';
@@ -46,7 +47,25 @@ namespace GeometricLayoutTest.Controllers
         }
 
         [TestMethod]
-        public void GetByCoordinates_Verify_Service_GetByCoordinates_Called()
+        public void GetByRowColumn_Failed_With_Exception()
+        {
+            // arrange
+            var row = 'F';
+            var column = 1;
+            mockLayoutService.Setup(src => src.GetByRowColumn(row, column)).Throws(new ArgumentOutOfRangeException());
+            layoutController = new LayoutController(mockLayoutService.Object);
+
+            // act
+            var unprocessableEntityResult = layoutController.GetByRowColumn(row, column);
+
+            // assert
+            Assert.AreEqual(null, unprocessableEntityResult.Value);
+
+            //Assert.AreEqual( Microsoft.AspNetCore.Mvc.UnprocessableEntityObjectResult, unprocessableEntityResult.Result.GetType());
+        }
+
+        [TestMethod]
+        public void GetByCoordinates_Successful_Verify_Service_GetByCoordinates_Called()
         {
             // arrange
             int x1, y1, x2, y2, x3, y3;
@@ -66,5 +85,25 @@ namespace GeometricLayoutTest.Controllers
             mockLayoutService.Verify(srv => srv.GetByCoordinates(x1, y1, x2, y2, x3, y3), Times.Once);
         }
 
+        [TestMethod]
+        public void GetByCoordinates_Failed_With_Exception()
+        {
+            // arrange
+            int x1, y1, x2, y2, x3, y3;
+            x1 = y1 = x2 = y3 = 0;
+            y2 = x3 = 10;
+
+            mockLayoutService.Setup(src => src.GetByCoordinates(x1, y1, x2, y2, x3, y3)).Throws(new ArgumentOutOfRangeException());
+
+            layoutController = new LayoutController(mockLayoutService.Object);
+
+            // act
+            var unprocessableEntityResult = layoutController.GetByCoordinates(x1, y1, x2, y2, x3, y3);
+
+            // assert
+            Assert.AreEqual(null, unprocessableEntityResult.Value);
+
+            //Assert.AreEqual( Microsoft.AspNetCore.Mvc.UnprocessableEntityObjectResult, unprocessableEntityResult.Result.GetType());
+        }
     }
 }
