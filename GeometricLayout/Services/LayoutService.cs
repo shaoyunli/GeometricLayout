@@ -12,7 +12,19 @@ namespace GeometricLayout.Services
 
         public RightTriangle GetByRowColumn(char row, int column)
         {
-            int rowIndex = Array.IndexOf(rowIds, row);
+            int rowIndex;
+
+            // Validate row
+            rowIndex = Array.IndexOf(rowIds, row);
+            if (rowIndex == -1)
+                throw new ArgumentOutOfRangeException("The row of the Id referenced is invalid.");
+           
+            // Validate column
+            if (column < 1 || column > 12)
+            {
+                throw new ArgumentOutOfRangeException("The column of the Id referenced is invalid.");
+            }            
+
             var triangle = new RightTriangle();
 
             if (column % 2 == 0)

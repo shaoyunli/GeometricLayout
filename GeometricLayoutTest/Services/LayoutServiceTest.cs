@@ -19,7 +19,7 @@ namespace GeometricLayoutTest.Test.Services
         }
 
         [TestMethod]
-        public void GetByRowColumn_Test()
+        public void GetByRowColumn_Successful()
         {
             // arrange
             var testCases = new[]
@@ -119,9 +119,33 @@ namespace GeometricLayoutTest.Test.Services
                 Assert.IsTrue(expectToList.SequenceEqual(resultToList));
             }
         }
+        
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentOutOfRangeException), "The row of the Id referenced is invalid.")]
+        public void GetByRowColum_Fails_Invalid_Row()
+        {
+            // act
+            layoutService.GetByRowColumn('U', 1);
+        }
 
         [TestMethod]
-        public void GetByCoordinates_Test()
+        [ExpectedException(typeof(ArgumentOutOfRangeException), "The column of the Id referenced is invalid.")]
+        public void GetByRowColum_Fails_Invalid_Column_Greater_than12()
+        {
+            // act
+            layoutService.GetByRowColumn('F', 13);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentOutOfRangeException), "The column of the Id referenced is invalid.")]
+        public void GetByRowColum_Fails_Invalid_Column_Lessthan1()
+        {
+            // act
+            layoutService.GetByRowColumn('F', 0);
+        }
+
+        [TestMethod]
+        public void GetByCoordinates_Successful()
         {
             // arrange
             var testCases = new[]
