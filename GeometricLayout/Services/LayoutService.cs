@@ -127,7 +127,7 @@ namespace GeometricLayout.Services
 
                 return rowIds[rowIndex].ToString() + column.ToString();
             }
-            catch (IndexOutOfRangeException e)
+            catch (IndexOutOfRangeException)
             {
                 throw new ArgumentOutOfRangeException("Coordinates provided are not valid.");
             }
