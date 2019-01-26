@@ -207,7 +207,7 @@ namespace GeometricLayoutTest.Test.Services
 
             foreach (var testCase in testCases)
             {
-                var expectedResult = new TriangleIndentifier() { Row = testCase.row, Column = testCase.column };
+                var expectedResult = testCase.row.ToString() + testCase.column.ToString();
 
                 // act
                 var result = layoutService.GetByCoordinates(
@@ -224,6 +224,54 @@ namespace GeometricLayoutTest.Test.Services
         }
 
         [TestMethod]
+        [ExpectedException(typeof(ArgumentOutOfRangeException), "Coordinates provided are not valid.")]
+        public void GetByCoordinates_Fails_Return_Invalid_Row()
+        {
+            // act
+            var result = layoutService.GetByCoordinates(0, 60, 0, 70, 10, 60);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentOutOfRangeException), "Coordinates provided are not valid.")]
+        public void GetByCoordinates_Fails_Return_Invalid_Column()
+        {
+            // act
+            var result = layoutService.GetByCoordinates(60, 50, 60, 60, 70, 50);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentOutOfRangeException), "Coordinates provided are not valid.")]
+        public void GetByCoordinates_Fails_Return_Invalid_RightTriangle_Coordinates()
+        {
+            // act
+            var result = layoutService.GetByCoordinates(0, 50, 0, 60, 20, 50);
+        }
+        
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentOutOfRangeException), "Coordinates provided are not valid.")]
+        public void GetByCoordinates_Fails_Return_Invalid_RightTriangle_Direction_Right()
+        {
+            // act
+            var result = layoutService.GetByCoordinates(10, 30, 10, 40, 20, 40);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentOutOfRangeException), "Coordinates provided are not valid.")]
+        public void GetByCoordinates_Fails_Return_Invalid_RightTriangle_Direction_Left()
+        {
+            // act
+            var result = layoutService.GetByCoordinates(10, 30, 20, 30, 20, 40);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentOutOfRangeException), "Coordinates provided are not valid.")]
+        public void GetByCoordinates_Fails_Return_Invalid_Triangle_Coordinates()
+        {
+            // act
+            var result = layoutService.GetByCoordinates(0, 50, 10, 50, 20, 50);
+        }
+
+        [TestMethod]
         public void ConvertToTupleList_Test()
         {
             int x1 = 40;
@@ -231,7 +279,7 @@ namespace GeometricLayoutTest.Test.Services
             int x2 = 30;
             int y2 = 30;
             int x3 = 40;
-            int y3 = 3;
+            int y3 = 30;
 
 
             var expect = new List<Tuple<int, int>>() { new Tuple<int, int>(30, 30), new Tuple<int, int>(40, 20), new Tuple<int, int>(40, 30) };
