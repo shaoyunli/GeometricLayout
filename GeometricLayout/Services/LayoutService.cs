@@ -7,17 +7,30 @@ using GeometricLayout.Configs;
 
 namespace GeometricLayout.Services
 {
+    /// <summary>
+    /// Layout service contains the business logic.
+    /// </summary>
     public class LayoutService : ILayoutService
     {
         private ILayoutServiceValidator _layoutServiceValidator;
         private IRightTriangleConverter _rightTriangleBuilder;
 
+        /// <summary>
+        /// Constructor of layout service.
+        /// </summary>
+        /// <param name="layoutServiceValidator"></param>
+        /// <param name="rightTriangleBuilder"></param>
         public LayoutService(ILayoutServiceValidator layoutServiceValidator, IRightTriangleConverter rightTriangleBuilder)
         {
             _layoutServiceValidator = layoutServiceValidator;
             _rightTriangleBuilder = rightTriangleBuilder;
         }
 
+        /// <summary>
+        /// Get a single triangle by its row and column.
+        /// </summary>
+        /// <param name="row">Row.</param>
+        /// <param name="column">Column.</param>
         public RightTriangle GetByRowColumn(char row, int column)
         {
             _layoutServiceValidator.ValidateByRowColumn(row, column);
@@ -25,6 +38,16 @@ namespace GeometricLayout.Services
             return _rightTriangleBuilder.ConvertToRightTriangle(row, column);
         }
 
+        /// <summary>
+        /// Get a single geometric item including its row and column as well as the coordinates of the three vertices. 
+        /// </summary>
+        /// <param name="x1">X axis of vertex1</param>
+        /// <param name="y1">Y axis of vertex1</param>
+        /// <param name="x2">X axis of vertex2</param>
+        /// <param name="y2">Y axis of vertex2</param>
+        /// <param name="x3">X axis of vertex3</param>
+        /// <param name="y3">Y axis of vertex3</param>
+        /// <returns>Id of triangle.</returns>
         public TriangleLocation GetByCoordinates(int x1, int y1, int x2, int y2, int x3, int y3)
         {
             _layoutServiceValidator.ValidateByCoordinates(x1, y1, x2, y2, x3, y3);

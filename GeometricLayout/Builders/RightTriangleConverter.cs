@@ -7,10 +7,19 @@ using GeometricLayout.Configs;
 
 namespace GeometricLayout.Builders
 {
+    /// <summary>
+    /// Converter to convert between coordinates and row&column.
+    /// </summary>
     public class RightTriangleConverter : IRightTriangleConverter
     {
         private const int LegLength = 10;
 
+        /// <summary>
+        /// Convert from row & column to coordinates.
+        /// </summary>
+        /// <param name="row"></param>
+        /// <param name="column"></param>
+        /// <returns></returns>
         public RightTriangle ConvertToRightTriangle(char row, int column)
         {
             var rowIndex = row - LayoutConstants.MinRow;
@@ -31,6 +40,16 @@ namespace GeometricLayout.Builders
             };
         }
 
+        /// <summary>
+        /// Convert from coordinates to row & column.
+        /// </summary>
+        /// <param name="x1"></param>
+        /// <param name="y1"></param>
+        /// <param name="x2"></param>
+        /// <param name="y2"></param>
+        /// <param name="x3"></param>
+        /// <param name="y3"></param>
+        /// <returns></returns>
         public TriangleLocation ConvertToLocation(int x1, int y1, int x2, int y2, int x3, int y3)
         {
             var sortedTupleList = ConvertToSortedTupleList(x1, y1, x2, y2, x3, y3);

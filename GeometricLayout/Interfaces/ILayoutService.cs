@@ -2,6 +2,9 @@
 
 namespace GeometricLayout.Interfaces
 {
+    /// <summary>
+    /// Layout service contains the business logic.
+    /// </summary>
     public interface ILayoutService
     {
         /// <summary>
