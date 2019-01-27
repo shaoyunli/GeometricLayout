@@ -28,7 +28,7 @@ namespace GeometricLayout.Controllers
             }
             catch (ArgumentOutOfRangeException e)
             {
-                return UnprocessableEntity(e.Message);
+                return UnprocessableEntity(e.ParamName);
             }
         }
         #endregion
@@ -43,7 +43,7 @@ namespace GeometricLayout.Controllers
             }
             catch (ArgumentOutOfRangeException e)
             {
-                return UnprocessableEntity(e.Message);
+                return UnprocessableEntity(e.ParamName);
             }
         }
         #endregion

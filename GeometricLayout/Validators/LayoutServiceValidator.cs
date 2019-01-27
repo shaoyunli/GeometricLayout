@@ -11,12 +11,12 @@ namespace GeometricLayout.Validators
         {
             if (row < LayoutConstants.MinRow || row > LayoutConstants.MaxRow)
             {
-                throw new ArgumentOutOfRangeException("The row of the Id referenced is invalid.");
+                throw new ArgumentOutOfRangeException("The row of the triangle location is invalid.");
             }
 
             if (column < LayoutConstants.MinColumn || column > LayoutConstants.MaxColumn)
             {
-                throw new ArgumentOutOfRangeException("The column of the Id referenced is invalid.");
+                throw new ArgumentOutOfRangeException("The column of the triangle location is invalid.");
             }
         }
 
@@ -29,7 +29,7 @@ namespace GeometricLayout.Validators
             var invalid = data.Find(p => p < min || p > max || p % LayoutConstants.LegLength != 0);
             if (invalid != 0)
             {
-                throw new ArgumentOutOfRangeException("The row of the Id referenced is invalid.");
+                throw new ArgumentOutOfRangeException("The coordinates provided are invalid.");
             }
         }
     }

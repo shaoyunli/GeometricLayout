@@ -60,8 +60,6 @@ namespace GeometricLayoutTest.Controllers
 
             // assert
             Assert.AreEqual(null, unprocessableEntityResult.Value);
-
-            //Assert.AreEqual( Microsoft.AspNetCore.Mvc.UnprocessableEntityObjectResult, unprocessableEntityResult.Result.GetType());
         }
 
         [TestMethod]
@@ -106,8 +104,6 @@ namespace GeometricLayoutTest.Controllers
 
             // assert
             Assert.AreEqual(null, unprocessableEntityResult.Value);
-
-            //Assert.AreEqual( Microsoft.AspNetCore.Mvc.UnprocessableEntityObjectResult, unprocessableEntityResult.Result.GetType());
         }
     }
 }
