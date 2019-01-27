@@ -6,7 +6,7 @@ using GeometricLayout.Services;
 namespace GeometricLayout.Models
 {
     public class RightTriangle
-    {       
+    {
 
         [Required]
         public int X1 { get; set; }

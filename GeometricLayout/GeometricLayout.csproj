@@ -18,11 +18,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Properties\" />
+    <None Include="wwwroot\layoutScript.js" />
   </ItemGroup>
 
   <ItemGroup>
-    <None Include="wwwroot\layoutScript.js" />
+    <Folder Include="Properties\" />
   </ItemGroup>
 
 </Project>

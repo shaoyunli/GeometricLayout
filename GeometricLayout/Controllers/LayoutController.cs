@@ -41,7 +41,7 @@ namespace GeometricLayout.Controllers
             {
                 return _layoutService.GetByCoordinates(x1, y1, x2, y2, x3, y3);
             }
-            catch(ArgumentOutOfRangeException e)
+            catch (ArgumentOutOfRangeException e)
             {
                 return UnprocessableEntity(e.Message);
             }

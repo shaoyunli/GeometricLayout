@@ -96,7 +96,7 @@ namespace GeometricLayoutTest.Services
 
         [TestInitialize]
         public void Setup()
-        {            
+        {
             _layoutService = new LayoutService(new LayoutServiceValidator(), new RightTriangleConverter());
         }
 
@@ -165,13 +165,13 @@ namespace GeometricLayoutTest.Services
                 };
 
                 // act
-                    var result = _layoutService.GetByCoordinates(
-                    testCase.coordinates.X1,
-                    testCase.coordinates.Y1,
-                    testCase.coordinates.X2,
-                    testCase.coordinates.Y2,
-                    testCase.coordinates.X3,
-                    testCase.coordinates.Y3);
+                var result = _layoutService.GetByCoordinates(
+                testCase.coordinates.X1,
+                testCase.coordinates.Y1,
+                testCase.coordinates.X2,
+                testCase.coordinates.Y2,
+                testCase.coordinates.X3,
+                testCase.coordinates.Y3);
 
                 // assert
                 Assert.AreEqual(expectedResult, result);
@@ -195,6 +195,3 @@ namespace GeometricLayoutTest.Services
         }
     }
 }
-
-
-

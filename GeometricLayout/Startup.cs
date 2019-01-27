@@ -7,6 +7,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Swashbuckle.AspNetCore.Swagger;
 using GeometricLayout.Services;
 using GeometricLayout.Interfaces;
+using GeometricLayout.Builders;
+using GeometricLayout.Validators;
 
 namespace GeometricLayout
 {
@@ -24,6 +26,8 @@ namespace GeometricLayout
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
             services.AddTransient<ILayoutService, LayoutService>();
+            services.AddTransient<ILayoutServiceValidator, LayoutServiceValidator>();
+            services.AddTransient<IRightTriangleConverter, RightTriangleConverter>();
 
             services.AddSwaggerGen(c =>
             {
