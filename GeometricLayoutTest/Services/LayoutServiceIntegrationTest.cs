@@ -97,14 +97,13 @@ namespace GeometricLayoutTest.Services
         [TestInitialize]
         public void Setup()
         {            
-            _layoutService = new LayoutService(new LayoutServiceValidator(), new RightTriangleBuilder());
+            _layoutService = new LayoutService(new LayoutServiceValidator(), new RightTriangleConverter());
         }
 
         [TestMethod]
         public void GetByRowColumn_Successful()
         {
             // arrange
-
             foreach (var testCase in _testCases)
             {
                 // arrange
@@ -114,7 +113,6 @@ namespace GeometricLayoutTest.Services
                 // act
                 var result = _layoutService.GetByRowColumn(row, column);
 
-                var resultToList = result.ToVertexList();
                 var triangle = new RightTriangle()
                 {
                     X1 = testCase.coordinates.X1,
@@ -124,10 +122,9 @@ namespace GeometricLayoutTest.Services
                     X3 = testCase.coordinates.X3,
                     Y3 = testCase.coordinates.Y3
                 };
-                var expectToList = triangle.ToVertexList();
 
                 // assert
-                Assert.IsTrue(expectToList.SequenceEqual(resultToList), $"{testCase.caseId}");
+                Assert.AreEqual(triangle, result);
             }
         }
 
@@ -161,10 +158,14 @@ namespace GeometricLayoutTest.Services
             // arrange
             foreach (var testCase in _testCases)
             {
-                var expectedResult = testCase.row.ToString() + testCase.column.ToString();
+                var expectedResult = new TriangleLocation()
+                {
+                    Row = testCase.row,
+                    Column = testCase.column
+                };
 
                 // act
-                var result = _layoutService.GetByCoordinates(
+                    var result = _layoutService.GetByCoordinates(
                     testCase.coordinates.X1,
                     testCase.coordinates.Y1,
                     testCase.coordinates.X2,
@@ -178,7 +179,7 @@ namespace GeometricLayoutTest.Services
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ArgumentOutOfRangeException), "Doordinates provided are not valid.")]
+        [ExpectedException(typeof(ArgumentOutOfRangeException), "Coordinates provided are not valid.")]
         public void GetByCoordinates_Fails_Return_Invalid_Row()
         {
             // act
@@ -186,63 +187,11 @@ namespace GeometricLayoutTest.Services
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ArgumentOutOfRangeException), "Doordinates provided are not valid.")]
+        [ExpectedException(typeof(ArgumentOutOfRangeException), "Coordinates provided are not valid.")]
         public void GetByCoordinates_Fails_Return_Invalid_Column()
         {
             // act
             var result = _layoutService.GetByCoordinates(60, 50, 60, 60, 70, 50);
-        }
-
-        [TestMethod]
-        [ExpectedException(typeof(ArgumentOutOfRangeException), "Doordinates provided are not valid.")]
-        public void GetByCoordinates_Fails_Return_Invalid_RightTriangle_Coordinates()
-        {
-            // act
-            var result = _layoutService.GetByCoordinates(0, 50, 0, 60, 20, 50);
-        }
-
-        [TestMethod]
-        [ExpectedException(typeof(ArgumentOutOfRangeException), "Doordinates provided are not valid.")]
-        public void GetByCoordinates_Fails_Return_Invalid_RightTriangle_Direction_Right()
-        {
-            // act
-            var result = _layoutService.GetByCoordinates(10, 30, 10, 40, 20, 30);
-        }
-
-        [TestMethod]
-        [ExpectedException(typeof(ArgumentOutOfRangeException), "Doordinates provided are not valid.")]
-        public void GetByCoordinates_Fails_Return_Invalid_RightTriangle_Direction_Left()
-        {
-            // act
-            var result = _layoutService.GetByCoordinates(10, 40, 20, 30, 20, 40);
-        }
-
-        [TestMethod]
-        [ExpectedException(typeof(ArgumentOutOfRangeException), "Doordinates provided are not valid.")]
-        public void GetByCoordinates_Fails_Return_Invalid_Triangle_Coordinates()
-        {
-            // act
-            var result = _layoutService.GetByCoordinates(0, 50, 10, 50, 20, 50);
-        }
-
-        [TestMethod]
-        public void ConvertToTupleList_Test()
-        {
-            int x1 = 40;
-            int y1 = 20;
-            int x2 = 30;
-            int y2 = 30;
-            int x3 = 40;
-            int y3 = 30;
-
-
-            var expect = new List<Tuple<int, int>>() { new Tuple<int, int>(30, 30), new Tuple<int, int>(40, 20), new Tuple<int, int>(40, 30) };
-
-            // act
-            var result = LayoutService.ConvertToTupleList(x1, y1, x2, y2, x3, y3);
-
-            // assert
-            Assert.IsTrue(expect.SequenceEqual(result));
         }
     }
 }

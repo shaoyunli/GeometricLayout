@@ -71,9 +71,13 @@ namespace GeometricLayoutTest.Controllers
             int x1, y1, x2, y2, x3, y3;
             x1 = y1 = x2 = y3 = 0;
             y2 = x3 = 10;
-            var triangleId = "F1";
+            var location = new TriangleLocation()
+            {
+                Row = 'F',
+                Column = 1
+            };
 
-            mockLayoutService.Setup(src => src.GetByCoordinates(x1, y1, x2, y2, x3, y3)).Returns(triangleId);
+            mockLayoutService.Setup(src => src.GetByCoordinates(x1, y1, x2, y2, x3, y3)).Returns(location);
 
             layoutController = new LayoutController(mockLayoutService.Object);
 
@@ -81,7 +85,7 @@ namespace GeometricLayoutTest.Controllers
             var okResult = layoutController.GetByCoordinates(x1, y1, x2, y2, x3, y3);
 
             // assert
-            Assert.AreEqual(triangleId, okResult.Value);
+            Assert.AreEqual(location, okResult.Value);
             mockLayoutService.Verify(srv => srv.GetByCoordinates(x1, y1, x2, y2, x3, y3), Times.Once);
         }
 

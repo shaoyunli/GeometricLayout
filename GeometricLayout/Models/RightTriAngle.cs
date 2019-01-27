@@ -33,10 +33,5 @@ namespace GeometricLayout.Models
                 other.X2 == X2 && other.Y2 == Y2 &&
                 other.X3 == X3 && other.Y3 == Y3;
         }
-
-        public List<Tuple<int, int>> ToVertexList()
-        {
-            return LayoutService.ConvertToTupleList(X1, Y1, X2, Y2, X3, Y3);
-        }
     }
 }

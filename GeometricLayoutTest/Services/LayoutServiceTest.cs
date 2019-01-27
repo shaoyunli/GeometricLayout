@@ -11,24 +11,23 @@ namespace GeometricLayoutTest.Services
    public class LayoutServiceTest
     {
         private Mock<ILayoutServiceValidator> layoutServiceValidator;
-        private Mock<IRightTriangleBuilder> rightTriangleBuilder;
+        private Mock<IRightTriangleConverter> rightTriangleBuilder;
         private LayoutService layoutService;
         
         [TestInitialize]
         public void Setup()
         {
             layoutServiceValidator = new Mock<ILayoutServiceValidator>();
-            rightTriangleBuilder = new Mock<IRightTriangleBuilder>();
+            rightTriangleBuilder = new Mock<IRightTriangleConverter>();
         }
 
         [TestMethod]
         [ExpectedException(typeof(ArgumentOutOfRangeException))]
-        public void GetByRowColumn_Validation_Failed()
+        public void GetByRowColumn_Input_Validation_Failed()
         {
             // arrange
             var row = 'R';
             var column = 9;
-            var triangle = new RightTriangle();
             layoutServiceValidator.Setup(validator => validator.ValidateByRowColumn(row, column)).Throws(new ArgumentOutOfRangeException());
             
             // act
@@ -36,7 +35,7 @@ namespace GeometricLayoutTest.Services
             layoutService.GetByRowColumn(row, column);
 
             // assert
-            rightTriangleBuilder.Verify(builder => builder.Build(It.IsAny<char>(), It.IsAny<int>()), Times.Never);
+            rightTriangleBuilder.Verify(builder => builder.ConvertToRightTriangle(It.IsAny<char>(), It.IsAny<int>()), Times.Never);
         }
 
         [TestMethod]
@@ -46,7 +45,7 @@ namespace GeometricLayoutTest.Services
             var row = 'R';
             var column = 9;
             var triangle = new RightTriangle();            
-            rightTriangleBuilder.Setup(builder => builder.Build(row, column)).Returns(triangle);
+            rightTriangleBuilder.Setup(builder => builder.ConvertToRightTriangle(row, column)).Returns(triangle);
 
             // act
             layoutService = new LayoutService(layoutServiceValidator.Object, rightTriangleBuilder.Object);
@@ -55,7 +54,56 @@ namespace GeometricLayoutTest.Services
             // assert
             Assert.AreEqual(triangle, result);
             layoutServiceValidator.Verify(validator => validator.ValidateByRowColumn(row, column), Times.Once);
-            rightTriangleBuilder.Verify(builder => builder.Build(row, column), Times.Once);
+            rightTriangleBuilder.Verify(builder => builder.ConvertToRightTriangle(row, column), Times.Once);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentOutOfRangeException))]
+        public void GetByCoordinates_Input_Validation_Failed()
+        {
+            // arrange
+            var x1 = 10;
+            var y1 = 30;
+            var x2 = 10;
+            var y2 = 20;
+            var x3 = 20;
+            var y3 = 30;
+
+            layoutServiceValidator.Setup(validator => validator.ValidateByCoordinates(x1, y1, x2, y2, x3, y3)).Throws(new ArgumentOutOfRangeException());
+
+            // act
+            layoutService = new LayoutService(layoutServiceValidator.Object, rightTriangleBuilder.Object);
+            layoutService.GetByCoordinates(x1, y1, x2, y2, x3, y3);
+
+            // assert
+            layoutServiceValidator.Verify(validator => validator.ValidateByCoordinates(x1, y1, x2, y2, x3, y3), Times.Once);
+        }
+
+        [TestMethod]
+        public void GetByCoordinates_Successful_Returns_RightTriangle_Location()
+        {
+            // arrange
+            var x1 = 10;
+            var y1 = 30;
+            var x2 = 10;
+            var y2 = 20;
+            var x3 = 20;
+            var y3 = 30;
+            var location = new TriangleLocation() {
+                Row = 'F',
+                Column = 1
+            };
+
+            rightTriangleBuilder.Setup(builder => builder.ConvertToLocation(x1, y1, x2, y2, x3, y3)).Returns(location);
+
+            // act
+            layoutService = new LayoutService(layoutServiceValidator.Object, rightTriangleBuilder.Object);
+            var result = layoutService.GetByCoordinates(x1, y1, x2, y2, x3, y3);
+
+            // assert
+            layoutServiceValidator.Verify(validator => validator.ValidateByCoordinates(x1, y1, x2, y2, x3, y3), Times.Once);
+            rightTriangleBuilder.Verify(builder => builder.ConvertToLocation(x1, y1, x2, y2, x3, y3), Times.Once);
+            Assert.AreEqual(result, location);
         }
     }
 }

@@ -2,8 +2,9 @@
 
 namespace GeometricLayout.Interfaces
 {
-    public interface IRightTriangleBuilder
+    public interface IRightTriangleConverter
     {
-        RightTriangle Build(char row, int column);
+        RightTriangle ConvertToRightTriangle(char row, int column);
+        TriangleLocation ConvertToLocation(int x1, int y1, int x2, int y2, int x3, int y3);
     }
 }

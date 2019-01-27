@@ -21,6 +21,6 @@ namespace GeometricLayout.Interfaces
         /// <param name="x3">X axis of vertex3</param>
         /// <param name="y3">Y axis of vertex3</param>
         /// <returns>Id of triangle.</returns>
-        string GetByCoordinates(int x1, int y1, int x2, int y2, int x3, int y3);
+        TriangleLocation GetByCoordinates(int x1, int y1, int x2, int y2, int x3, int y3);
     }
 }

@@ -12,5 +12,7 @@ namespace GeometricLayout.Configs
 
         public readonly static char MinRow = 'A';
         public readonly static char MaxRow = 'F';
+
+        public readonly static int LegLength = 10;
     }
 }

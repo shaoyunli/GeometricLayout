@@ -2,7 +2,7 @@
 
 namespace GeometricLayout.Models
 {
-    public class TriangleIndentifier
+    public class TriangleLocation
     {
         [Required]
         public char Row { get; set; }
@@ -10,9 +10,10 @@ namespace GeometricLayout.Models
         [Required]
         public int Column { get; set; }
 
-        public override string ToString()
+        public override bool Equals(object obj)
         {
-            return Row + Column.ToString();
+            var other = obj as TriangleLocation;
+            return other.Row == Row && other.Column == Column;
         }
     }
 }
