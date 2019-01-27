@@ -1,50 +1,59 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Security.Cryptography.X509Certificates;
 using GeometricLayout.Interfaces;
 using GeometricLayout.Models;
+using GeometricLayout.Configs;
 
 namespace GeometricLayout.Services
 {
     public class LayoutService : ILayoutService
     {
-        private const int lengthOfLeg = 10;
-        private const int minColumnNumber = 1;
-        private const int maxColumnNumber = 12;
+        private ILayoutServiceValidator _layoutServiceValidator;
+        private IRightTriangleBuilder _rightTriangleBuilder;
 
-        private readonly static char MinRowId = 'A';
-        private readonly static char MaxRowId = 'F';
+        public LayoutService(ILayoutServiceValidator layoutServiceValidator, IRightTriangleBuilder rightTriangleBuilder)
+        {
+            _layoutServiceValidator = layoutServiceValidator;
+            _rightTriangleBuilder = rightTriangleBuilder;
+        }
 
         public RightTriangle GetByRowColumn(char row, int column)
         {
-            int rowIndex;
+            //int rowIndex;
 
             // Validate row
+            _layoutServiceValidator.ValidateByRowColumn(row, column);
+
+            // Build right triangle
+            RightTriangle triangle = _rightTriangleBuilder.Build(row, column);
+
+            /*
             rowIndex = row - MinRowId;
-            if (row < MinRowId || row > MaxRowId || column < minColumnNumber || column > maxColumnNumber)
-                throw new ArgumentOutOfRangeException("The column of the Id referenced is invalid.");
 
-            var triangle = new RightTriangle();
-            // todo: RightTriangle(X2, Y2, Type)
-            int columnPosition = (column - 1) / 2;
 
-            triangle.X2 = columnPosition * lengthOfLeg;
-            triangle.Y2 = rowIndex * lengthOfLeg;
-            triangle.X3 = triangle.X2 + lengthOfLeg;
-            triangle.Y3 = triangle.Y2 + lengthOfLeg;
+            */
 
-            if (column % 2 == 0)
-            {
-                triangle.X1 = triangle.X2 + lengthOfLeg;
-                triangle.Y1 = triangle.Y2;
-            }
-            else
-            {
-                triangle.X1 = triangle.X2;
-                triangle.Y1 = triangle.Y2 + lengthOfLeg;
-            }
+            //var triangle = new RightTriangle();
+            //// todo: RightTriangle(X2, Y2, Type)
+            //int columnPosition = (column - 1) / 2;
+
+            //triangle.X2 = columnPosition * lengthOfLeg;
+            //triangle.Y2 = rowIndex * lengthOfLeg;
+
+            //triangle.X3 = triangle.X2 + lengthOfLeg;
+            //triangle.Y3 = triangle.Y2 + lengthOfLeg;
+
+            //if (column % 2 == 0)
+            //{
+            //    triangle.X1 = triangle.X2 + lengthOfLeg;
+            //    triangle.Y1 = triangle.Y2;
+            //}
+            //else
+            //{
+            //    triangle.X1 = triangle.X2;
+            //    triangle.Y1 = triangle.Y2 + lengthOfLeg;
+            //}
 
             return triangle;
         }
@@ -108,7 +117,7 @@ namespace GeometricLayout.Services
                     throw new ArgumentOutOfRangeException("Coordinates provided are not valid.");
                 }
 
-                return ((char)(MinRowId + rowIndex)).ToString() + column.ToString();
+                return ((char)(LayoutConstants.MinRow + rowIndex)).ToString() + column.ToString();
             }
             catch (IndexOutOfRangeException)
             {

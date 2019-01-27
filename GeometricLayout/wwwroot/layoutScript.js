@@ -1,27 +1,29 @@
 ﻿const uri = 'api/layout/';
 let todos = null;
 
-function drawTriangle(convas, x1, y1, x2, y2, x3, y3, row, column) {
-    var canvas = document.getElementById(convas);
-    if (canvas.getContext) {
-        var context = canvas.getContext('2d');
-        context.clearRect(0, 0, canvas.width, canvas.height);
-        context.beginPath();
-        context.moveTo(x1, y1);
-        context.lineTo(x2, y2);
-        context.lineTo(x3, y3);
-        context.fillStyle = "green";
-        context.fill();
+function drawTriangle(convasId, x1, y1, x2, y2, x3, y3, row, column) {
+    var dpr = window.devicePixelRatio || 1;
+    var canvas = document.getElementById('displayArea');
+    canvas.width = rect.width * dpr;
+    canvas.height = rect.height * dpr;
+    var context = canvas.getContext('2d');
+    ctx.scale(dpr, dpr);
+    context.clearRect(0, 0, canvas.width, canvas.height);
+    context.beginPath();
+    context.moveTo(x1, y1);
+    context.lineTo(x2, y2);
+    context.lineTo(x3, y3);
+    context.fillStyle = "green";
+    context.fill();
 
-        context.beginPath();
-        context.fillStyle = "black";
-        var y = 7 + y2;
-        if (column % 2 == 0) {
-            y = 7 + y1;
-        }
-        context.fillText(row + column.toString(), x1 + 2, y);
-        context.fill();
+    context.beginPath();
+    context.fillStyle = "black";
+    var y = 7 + y2;
+    if (column % 2 == 0) {
+        y = 7 + y1;
     }
+    context.fillText(row + column.toString(), x1 + 2, y);
+    context.fill();
 }
 
 function getTriangleByRowColumn() {

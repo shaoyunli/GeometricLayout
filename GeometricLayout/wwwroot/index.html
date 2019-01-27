@@ -36,16 +36,15 @@
     <a href="swagger" target="_blank">Swagger</a>
 
     <h3>Get Triangle by Row and Column</h3>
-    <form action="javascript:void(0);" method="GET" onsubmit="getTriangleByRowColumn()">
+    <div>
         <input type="text" id="row" placeholder="row">
         <input type="text" id="column" placeholder="column">
-        <input type="submit" value="Submit">
-    </form>
-    <canvas style="margin-top: 20px;" id="convas2"></canvas>
+        <input type="button" value="Get Coordinates" onclick="getTriangleByRowColumn()">
+    </div>
 
     <h3>Get Triangle ID by Coordinates</h3>
-    <form action="javascript:void(0);" method="GET" onsubmit="getIdByCoordinates()">
-        <input type="text" id="x1" placeholder="x1">
+    <div>
+        <input type="text" id="x1" plac m,;/m,./eholder="x1">
         <input type="text" id="y1" placeholder="y1">
         <br />
         <input type="text" id="x2" placeholder="x2">
@@ -54,10 +53,10 @@
         <input type="text" id="x3" placeholder="x3">
         <input type="text" id="y3" placeholder="y3">
         <br />
-        <input type="submit" value="Submit">
-    </form>
+        <input type="button" value="Get Row and Column" onclick="getIdByCoordinates()">
+    </div>
 
-    <canvas style="margin-top: 20px;" id="convas2"></canvas>
+    <canvas style="margin-top: 20px;" id="displayArea"></canvas>
 
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"
             integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
