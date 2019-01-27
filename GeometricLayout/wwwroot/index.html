@@ -1,10 +1,67 @@
 ﻿<!DOCTYPE html>
 <html>
 <head>
-    <meta charset="utf-8" />
-    <title></title>
+    <meta charset="UTF-8">
+    <title>Geomatric Layout</title>
+    <style>
+
+        input[type='submit'], button, [aria-label] {
+            cursor: pointer;
+        }
+
+        #spoiler {
+            display: none;
+        }
+
+        table {
+            font-family: Arial, sans-serif;
+            border: 1px solid;
+            border-collapse: collapse;
+        }
+
+        th {
+            background-color: #0066CC;
+            color: white;
+        }
+
+        td {
+            border: 1px solid;
+            padding: 5px;
+        }
+    </style>
 </head>
 <body>
+    <h1>Geomatric Layout</h1>
+    <h3>Web API Swagger</h3>
+    <a href="swagger" target="_blank">Swagger</a>
 
+    <h3>Get Triangle by Row and Column</h3>
+    <form action="javascript:void(0);" method="GET" onsubmit="getTriangleByRowColumn()">
+        <input type="text" id="row" placeholder="row">
+        <input type="text" id="column" placeholder="column">
+        <input type="submit" value="Submit">
+    </form>
+    <canvas style="margin-top: 20px;" id="convas2"></canvas>
+
+    <h3>Get Triangle ID by Coordinates</h3>
+    <form action="javascript:void(0);" method="GET" onsubmit="getIdByCoordinates()">
+        <input type="text" id="x1" placeholder="x1">
+        <input type="text" id="y1" placeholder="y1">
+        <br />
+        <input type="text" id="x2" placeholder="x2">
+        <input type="text" id="y2" placeholder="y2">
+        <br />
+        <input type="text" id="x3" placeholder="x3">
+        <input type="text" id="y3" placeholder="y3">
+        <br />
+        <input type="submit" value="Submit">
+    </form>
+
+    <canvas style="margin-top: 20px;" id="convas2"></canvas>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"
+            integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+            crossorigin="anonymous"></script>
+    <script src="layoutScript.js"></script>
 </body>
 </html>

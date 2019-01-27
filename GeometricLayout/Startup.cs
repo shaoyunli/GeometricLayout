@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Builder;
+﻿using System.Collections.Generic;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
@@ -24,17 +25,19 @@ namespace GeometricLayout
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
             services.AddTransient<ILayoutService, LayoutService>();
 
-            services.AddSwaggerGen(c => {
-                c.SwaggerDoc("v1", new Info {
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new Info
+                {
                     Title = "Geometric Layout API",
                     Version = "v1",
-                Description = "Geometric Layout Web API.",
-                Contact = new Contact
-                {
-                    Name = "Shaoyun Li",
-                    Email = "shaoyun.li@gmail.com",
-                    Url = "https://www.linkedin.com/in/shaoyunli/"
-                }
+                    Description = "Geometric Layout Web API.",
+                    Contact = new Contact
+                    {
+                        Name = "Shaoyun Li",
+                        Email = "shaoyun.li@gmail.com",
+                        Url = "https://www.linkedin.com/in/shaoyunli/"
+                    }
                 });
             });
         }
@@ -49,7 +52,7 @@ namespace GeometricLayout
             // specifying the Swagger JSON endpoint.
             app.UseSwaggerUI(c =>
             {
-                c.SwaggerEndpoint("/swagger/v1/swagger.json", "Geometric Layout API");  
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "Geometric Layout API");
             });
 
             if (env.IsDevelopment())
@@ -57,6 +60,11 @@ namespace GeometricLayout
                 app.UseDeveloperExceptionPage();
             }
 
+            app.UseDefaultFiles(new DefaultFilesOptions
+            {
+                DefaultFileNames = new List<string> { "index.html" }
+            });
+            app.UseStaticFiles();
             app.UseMvc();
         }
     }

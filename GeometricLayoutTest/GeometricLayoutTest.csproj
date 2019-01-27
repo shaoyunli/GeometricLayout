@@ -18,8 +18,4 @@
     <ProjectReference Include="..\GeometricLayout\GeometricLayout.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Scripts\" />
-  </ItemGroup>
-
 </Project>
