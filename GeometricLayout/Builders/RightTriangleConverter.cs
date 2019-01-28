@@ -10,7 +10,7 @@ namespace GeometricLayout.Builders
     /// <summary>
     /// Converter to convert between coordinates and row&column.
     /// </summary>
-    public class RightTriangleConverter : IRightTriangleConverter
+    public class RightTriangleConverter : ITriangleConverter
     {
         private const int LegLength = 10;
 
@@ -20,7 +20,7 @@ namespace GeometricLayout.Builders
         /// <param name="row"></param>
         /// <param name="column"></param>
         /// <returns></returns>
-        public RightTriangle ConvertToRightTriangle(char row, int column)
+        public Triangle ConvertToRightTriangle(char row, int column)
         {
             var rowIndex = row - LayoutConstants.MinRow;
             int columnPosition = (column - 1) / 2;
@@ -29,7 +29,7 @@ namespace GeometricLayout.Builders
             int baseX = columnPosition * LegLength;
             int baseY = rowIndex * LegLength;
 
-            return new RightTriangle()
+            return new Triangle()
             {
                 X1 = isOddColumn ? baseX : baseX + LegLength,
                 Y1 = isOddColumn ? baseY + LegLength : baseY,

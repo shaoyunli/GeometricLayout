@@ -25,7 +25,7 @@ namespace GeometricLayoutTest.Controllers
             // arrange
             var row = 'F';
             var column = 1;
-            var triangle = new RightTriangle()
+            var triangle = new Triangle()
             {
                 X1 = 0,
                 Y1 = 0,

@@ -20,7 +20,7 @@ namespace GeometricLayout.Controllers
 
         #region snippet_GetByRowColumn
         [HttpGet("row/{row}/column/{column}")]
-        public ActionResult<RightTriangle> GetByRowColumn(char row, int column)
+        public ActionResult<Triangle> GetByRowColumn(char row, int column)
         {
             try
             {

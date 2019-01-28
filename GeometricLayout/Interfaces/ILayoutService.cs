@@ -12,7 +12,7 @@ namespace GeometricLayout.Interfaces
         /// </summary>
         /// <param name="row">Row.</param>
         /// <param name="column">Column.</param>
-        RightTriangle GetByRowColumn(char row, int column);
+        Triangle GetByRowColumn(char row, int column);
 
         /// <summary>
         /// Get a single geometric item including its row and column as well as the coordinates of the three vertices. 

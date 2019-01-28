@@ -27,7 +27,7 @@ namespace GeometricLayout
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
             services.AddTransient<ILayoutService, LayoutService>();
             services.AddTransient<ILayoutServiceValidator, LayoutServiceValidator>();
-            services.AddTransient<IRightTriangleConverter, RightTriangleConverter>();
+            services.AddTransient<ITriangleConverter, RightTriangleConverter>();
 
             services.AddSwaggerGen(c =>
             {

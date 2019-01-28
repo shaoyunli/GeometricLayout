@@ -8,7 +8,7 @@ namespace GeometricLayout.Models
     /// <summary>
     /// Right triangle model.
     /// </summary>
-    public class RightTriangle
+    public class Triangle
     {
         /// <summary>
         /// X-axis of vertex1.
@@ -53,7 +53,7 @@ namespace GeometricLayout.Models
         /// <returns></returns>
         public override bool Equals(object obj)
         {
-            var other = obj as RightTriangle;
+            var other = obj as Triangle;
             return other.X1 == X1 && other.Y1 == Y1 &&
                 other.X2 == X2 && other.Y2 == Y2 &&
                 other.X3 == X3 && other.Y3 == Y3;

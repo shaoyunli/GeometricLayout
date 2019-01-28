@@ -22,7 +22,7 @@ namespace GeometricLayoutTest.Builders
             // arrange
             var row = 'C';
             var column = 3;
-            var triangle = new RightTriangle()
+            var triangle = new Triangle()
             {
                 X1 = 10,
                 Y1 = 30,
@@ -45,7 +45,7 @@ namespace GeometricLayoutTest.Builders
             // arrange
             var row = 'C';
             var column = 4;
-            var triangle = new RightTriangle()
+            var triangle = new Triangle()
             {
                 X1 = 20,
                 Y1 = 20,

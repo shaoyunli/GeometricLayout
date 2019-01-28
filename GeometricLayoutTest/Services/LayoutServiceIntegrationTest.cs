@@ -113,7 +113,7 @@ namespace GeometricLayoutTest.Services
                 // act
                 var result = _layoutService.GetByRowColumn(row, column);
 
-                var triangle = new RightTriangle()
+                var triangle = new Triangle()
                 {
                     X1 = testCase.coordinates.X1,
                     Y1 = testCase.coordinates.Y1,
