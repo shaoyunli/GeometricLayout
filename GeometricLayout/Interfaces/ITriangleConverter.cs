@@ -13,7 +13,7 @@ namespace GeometricLayout.Interfaces
         /// <param name="row"></param>
         /// <param name="column"></param>
         /// <returns></returns>
-        Triangle ConvertToRightTriangle(char row, int column);
+        Triangle ConvertFromRowColumnToTriangle(char row, int column);
 
         /// <summary>
         /// Convert from coordinates to row & column.
@@ -25,6 +25,6 @@ namespace GeometricLayout.Interfaces
         /// <param name="x3"></param>
         /// <param name="y3"></param>
         /// <returns></returns>
-        TriangleLocation ConvertToLocation(int x1, int y1, int x2, int y2, int x3, int y3);
+        TriangleLocation ConvertFromTriangleToLocation(int x1, int y1, int x2, int y2, int x3, int y3);
     }
 }

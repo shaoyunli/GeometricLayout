@@ -33,7 +33,7 @@ namespace GeometricLayoutTest.Builders
             };
 
             // act
-            var result = _rightTriangleConverter.ConvertToRightTriangle(row, column);
+            var result = _rightTriangleConverter.ConvertFromRowColumnToTriangle(row, column);
 
             // assert
             Assert.IsTrue(result.Equals(triangle));
@@ -56,7 +56,7 @@ namespace GeometricLayoutTest.Builders
             };
 
             // act
-            var result = _rightTriangleConverter.ConvertToRightTriangle(row, column);
+            var result = _rightTriangleConverter.ConvertFromRowColumnToTriangle(row, column);
 
             // assert
             Assert.IsTrue(result.Equals(triangle));
@@ -80,7 +80,7 @@ namespace GeometricLayoutTest.Builders
             };
 
             // act
-            var result = _rightTriangleConverter.ConvertToLocation(x1, y1, x2, y2, x3, y3);
+            var result = _rightTriangleConverter.ConvertFromTriangleToLocation(x1, y1, x2, y2, x3, y3);
 
             // assert
             Assert.AreEqual(location, result);
@@ -104,7 +104,7 @@ namespace GeometricLayoutTest.Builders
             };
 
             // act
-            var result = _rightTriangleConverter.ConvertToLocation(x1, y1, x2, y2, x3, y3);
+            var result = _rightTriangleConverter.ConvertFromTriangleToLocation(x1, y1, x2, y2, x3, y3);
 
             // assert
             Assert.AreEqual(location, result);
@@ -115,7 +115,7 @@ namespace GeometricLayoutTest.Builders
         public void ConvertToLocation_Fails_Invalid_RightTriangle_Coordinates()
         {
             // act
-            var result = _rightTriangleConverter.ConvertToLocation(0, 50, 0, 60, 20, 50);
+            var result = _rightTriangleConverter.ConvertFromTriangleToLocation(0, 50, 0, 60, 20, 50);
         }
 
 
@@ -125,7 +125,7 @@ namespace GeometricLayoutTest.Builders
         public void ConvertToLocation_Fails_Invalid_RightTriangle_Direction_Left()
         {
             // act
-            var result = _rightTriangleConverter.ConvertToLocation(10, 40, 20, 30, 20, 40);
+            var result = _rightTriangleConverter.ConvertFromTriangleToLocation(10, 40, 20, 30, 20, 40);
         }
 
 
@@ -134,7 +134,7 @@ namespace GeometricLayoutTest.Builders
         public void ConvertToLocation_Fails_Invalid_RightTriangle_Direction_Right()
         {
             // act
-            var result = _rightTriangleConverter.ConvertToLocation(10, 30, 10, 40, 20, 30);
+            var result = _rightTriangleConverter.ConvertFromTriangleToLocation(10, 30, 10, 40, 20, 30);
         }
 
 
@@ -143,7 +143,7 @@ namespace GeometricLayoutTest.Builders
         public void ConvertToLocation_Fails_Invalid_Triangle_Coordinates()
         {
             // act
-            var result = _rightTriangleConverter.ConvertToLocation(0, 50, 10, 50, 20, 50);
+            var result = _rightTriangleConverter.ConvertFromTriangleToLocation(0, 50, 10, 50, 20, 50);
         }
 
     }

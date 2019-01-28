@@ -20,7 +20,7 @@ namespace GeometricLayout.Builders
         /// <param name="row"></param>
         /// <param name="column"></param>
         /// <returns></returns>
-        public Triangle ConvertToRightTriangle(char row, int column)
+        public Triangle ConvertFromRowColumnToTriangle(char row, int column)
         {
             var rowIndex = row - LayoutConstants.MinRow;
             int columnPosition = (column - 1) / 2;
@@ -50,7 +50,7 @@ namespace GeometricLayout.Builders
         /// <param name="x3"></param>
         /// <param name="y3"></param>
         /// <returns></returns>
-        public TriangleLocation ConvertToLocation(int x1, int y1, int x2, int y2, int x3, int y3)
+        public TriangleLocation ConvertFromTriangleToLocation(int x1, int y1, int x2, int y2, int x3, int y3)
         {
             var sortedTupleList = ConvertToSortedTupleList(x1, y1, x2, y2, x3, y3);
             ValidateCoordinates(sortedTupleList);

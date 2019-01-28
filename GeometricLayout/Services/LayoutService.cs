@@ -35,7 +35,7 @@ namespace GeometricLayout.Services
         {
             _layoutServiceValidator.ValidateByRowColumn(row, column);
 
-            return _triangleConverter.ConvertToRightTriangle(row, column);
+            return _triangleConverter.ConvertFromRowColumnToTriangle(row, column);
         }
 
         /// <summary>
@@ -51,7 +51,7 @@ namespace GeometricLayout.Services
         public TriangleLocation GetByCoordinates(int x1, int y1, int x2, int y2, int x3, int y3)
         {
             _layoutServiceValidator.ValidateByCoordinates(x1, y1, x2, y2, x3, y3);
-            return _triangleConverter.ConvertToLocation(x1, y1, x2, y2, x3, y3);
+            return _triangleConverter.ConvertFromTriangleToLocation(x1, y1, x2, y2, x3, y3);
         }
     }
 }

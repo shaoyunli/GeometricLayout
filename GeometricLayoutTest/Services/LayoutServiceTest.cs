@@ -35,7 +35,7 @@ namespace GeometricLayoutTest.Services
             layoutService.GetByRowColumn(row, column);
 
             // assert
-            triangleConverter.Verify(builder => builder.ConvertToRightTriangle(It.IsAny<char>(), It.IsAny<int>()), Times.Never);
+            triangleConverter.Verify(builder => builder.ConvertFromRowColumnToTriangle(It.IsAny<char>(), It.IsAny<int>()), Times.Never);
         }
 
         [TestMethod]
@@ -45,7 +45,7 @@ namespace GeometricLayoutTest.Services
             var row = 'R';
             var column = 9;
             var triangle = new Triangle();            
-            triangleConverter.Setup(builder => builder.ConvertToRightTriangle(row, column)).Returns(triangle);
+            triangleConverter.Setup(builder => builder.ConvertFromRowColumnToTriangle(row, column)).Returns(triangle);
 
             // act
             layoutService = new LayoutService(layoutServiceValidator.Object, triangleConverter.Object);
@@ -54,7 +54,7 @@ namespace GeometricLayoutTest.Services
             // assert
             Assert.AreEqual(triangle, result);
             layoutServiceValidator.Verify(validator => validator.ValidateByRowColumn(row, column), Times.Once);
-            triangleConverter.Verify(builder => builder.ConvertToRightTriangle(row, column), Times.Once);
+            triangleConverter.Verify(builder => builder.ConvertFromRowColumnToTriangle(row, column), Times.Once);
         }
 
         [TestMethod]
@@ -94,7 +94,7 @@ namespace GeometricLayoutTest.Services
                 Column = 1
             };
 
-            triangleConverter.Setup(builder => builder.ConvertToLocation(x1, y1, x2, y2, x3, y3)).Returns(location);
+            triangleConverter.Setup(builder => builder.ConvertFromTriangleToLocation(x1, y1, x2, y2, x3, y3)).Returns(location);
 
             // act
             layoutService = new LayoutService(layoutServiceValidator.Object, triangleConverter.Object);
@@ -102,7 +102,7 @@ namespace GeometricLayoutTest.Services
 
             // assert
             layoutServiceValidator.Verify(validator => validator.ValidateByCoordinates(x1, y1, x2, y2, x3, y3), Times.Once);
-            triangleConverter.Verify(builder => builder.ConvertToLocation(x1, y1, x2, y2, x3, y3), Times.Once);
+            triangleConverter.Verify(builder => builder.ConvertFromTriangleToLocation(x1, y1, x2, y2, x3, y3), Times.Once);
             Assert.AreEqual(result, location);
         }
     }
