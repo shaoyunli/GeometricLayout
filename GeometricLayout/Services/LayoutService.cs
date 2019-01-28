@@ -13,17 +13,17 @@ namespace GeometricLayout.Services
     public class LayoutService : ILayoutService
     {
         private ILayoutServiceValidator _layoutServiceValidator;
-        private ITriangleConverter _triangleBuilder;
+        private ITriangleConverter _triangleConverter;
 
         /// <summary>
         /// Constructor of layout service.
         /// </summary>
         /// <param name="layoutServiceValidator"></param>
-        /// <param name="triangleBuilder"></param>
-        public LayoutService(ILayoutServiceValidator layoutServiceValidator, ITriangleConverter triangleBuilder)
+        /// <param name="triangleConverter"></param>
+        public LayoutService(ILayoutServiceValidator layoutServiceValidator, ITriangleConverter triangleConverter)
         {
             _layoutServiceValidator = layoutServiceValidator;
-            _triangleBuilder = triangleBuilder;
+            _triangleConverter = triangleConverter;
         }
 
         /// <summary>
@@ -35,7 +35,7 @@ namespace GeometricLayout.Services
         {
             _layoutServiceValidator.ValidateByRowColumn(row, column);
 
-            return _triangleBuilder.ConvertToRightTriangle(row, column);
+            return _triangleConverter.ConvertToRightTriangle(row, column);
         }
 
         /// <summary>
@@ -51,7 +51,7 @@ namespace GeometricLayout.Services
         public TriangleLocation GetByCoordinates(int x1, int y1, int x2, int y2, int x3, int y3)
         {
             _layoutServiceValidator.ValidateByCoordinates(x1, y1, x2, y2, x3, y3);
-            return _triangleBuilder.ConvertToLocation(x1, y1, x2, y2, x3, y3);
+            return _triangleConverter.ConvertToLocation(x1, y1, x2, y2, x3, y3);
         }
     }
 }
